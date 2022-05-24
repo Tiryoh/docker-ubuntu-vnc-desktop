@@ -4,19 +4,22 @@
 REPO  ?= dorowu/ubuntu-desktop-lxde-vnc
 TAG   ?= latest
 # you can choose other base image versions
-IMAGE ?= ubuntu:20.04
+IMAGE ?= ubuntu:22.04
 # IMAGE ?= nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
 # choose from supported flavors (see available ones in ./flavors/*.yml)
 FLAVOR ?= lxde
 # armhf or amd64
 ARCH ?= amd64
+# apt source
+LOCALBUILD ?= 0
 
 # These files will be generated from teh Jinja templates (.j2 sources)
 templates = Dockerfile rootfs/etc/supervisor/conf.d/supervisord.conf
 
 # Rebuild the container image
 build: $(templates)
-	docker build -t $(REPO):$(TAG) .
+	cp Dockerfile Dockerfile.$(ARCH)
+	docker build -t $(REPO):$(TAG) -f Dockerfile.$(ARCH) .
 
 # Test run the container
 # the local dir will be mounted under /src read-only
