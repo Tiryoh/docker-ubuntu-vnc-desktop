@@ -57,7 +57,11 @@ RUN apt-get update \
 {%endif%}
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-        lxde gtk2-engines-murrine gnome-themes-standard gtk2-engines-pixbuf gtk2-engines-murrine arc-theme \
+        lightdm \
+    && apt-get install -y \
+        lxde \
+    && apt-get install -y --no-install-recommends \
+        gtk2-engines-murrine gnome-themes-standard gtk2-engines-pixbuf gtk2-engines-murrine arc-theme \
     && apt-get autoclean -y \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*

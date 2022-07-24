@@ -1,10 +1,10 @@
-# Built with arch: amd64 flavor: lxde image: ubuntu:22.04
+# Built with arch: amd64 flavor: lxde image: ubuntu:jammy-20220531
 #
 ################################################################################
 # base system
 ################################################################################
 
-FROM ubuntu:22.04 as system
+FROM ubuntu:jammy-20220531 as system
 
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -49,7 +49,11 @@ RUN apt-get update \
 
 RUN apt-get update \
     && apt-get install -y --no-install-recommends \
-        lxde gtk2-engines-murrine gnome-themes-standard gtk2-engines-pixbuf gtk2-engines-murrine arc-theme \
+        lightdm \
+    && apt-get install -y \
+        lxde \
+    && apt-get install -y --no-install-recommends \
+        gtk2-engines-murrine gnome-themes-standard gtk2-engines-pixbuf gtk2-engines-murrine arc-theme \
     && apt-get autoclean -y \
     && apt-get autoremove -y \
     && rm -rf /var/lib/apt/lists/*
@@ -87,7 +91,7 @@ RUN apt-get update \
 ################################################################################
 # builder
 ################################################################################
-FROM ubuntu:22.04 as builder
+FROM ubuntu:jammy-20220531 as builder
 
 
 
