@@ -61,9 +61,11 @@ RUN apt-get update \
 # libreoffice  pinta language-pack-zh-hant language-pack-gnome-zh-hant firefox-locale-zh-hant libreoffice-l10n-zh-tw
 
 # tini to fix subreap
-ARG TINI_VERSION=v0.19.0
-ADD https://github.com/krallin/tini/releases/download/${TINI_VERSION}/tini /bin/tini
-RUN chmod +x /bin/tini
+RUN apt-get update \
+    && apt-get install -y --no-install-recommends tini \
+    && apt-get autoclean -y \
+    && apt-get autoremove -y \
+    && rm -rf /var/lib/apt/lists/*
 
 # ffmpeg
 RUN apt-get update \
@@ -91,7 +93,9 @@ RUN apt-get update \
 ################################################################################
 # builder
 ################################################################################
+
 FROM ubuntu:jammy-20220531 as builder
+
 
 
 
