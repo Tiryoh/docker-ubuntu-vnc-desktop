@@ -8,7 +8,7 @@ IMAGE ?= ubuntu:jammy-20220531
 # IMAGE ?= nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
 # choose from supported flavors (see available ones in ./flavors/*.yml)
 FLAVOR ?= lxde
-# armhf or amd64
+# arm64 or amd64
 ARCH ?= amd64
 # apt source
 LOCALBUILD ?= 0
@@ -56,7 +56,7 @@ extra-clean:
 
 # Run jinja2cli to parse Jinja template applying rules defined in the flavors definitions
 %: %.j2 flavors/$(FLAVOR).yml
-	docker run -v $(shell pwd):/data vikingco/jinja2cli \
+	docker run --rm -v $(shell pwd):/data vikingco/jinja2cli \
 		-D flavor=$(FLAVOR) \
 		-D image=$(IMAGE) \
 		-D localbuild=$(LOCALBUILD) \
