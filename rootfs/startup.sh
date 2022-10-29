@@ -31,7 +31,7 @@ if [ "$USER" != "root" ]; then
     fi
     HOME=/home/$USER
     echo "$USER:$PASSWORD" | chpasswd
-    cp -r /root/{.config,.gtkrc-2.0,.asoundrc} ${HOME}
+    cp -r /root/{.config,.gtkrc-2.0,.asoundrc} ${HOME} 2>/dev/null
     chown -R $USER:$USER ${HOME}
     [ -d "/dev/snd" ] && chgrp -R adm /dev/snd
 fi
@@ -71,5 +71,11 @@ fi
 # clearup
 PASSWORD=
 HTTP_PASSWORD=
+
+echo "============================================================================================"
+echo "NOTE: --security-opt seccomp=unconfined flag is required to launch Ubuntu Jammy based image."
+echo "See https://github.com/Tiryoh/docker-ubuntu-vnc-desktop/pull/1#issuecomment-1193352793"
+echo "or https://github.com/Tiryoh/docker-ros2-desktop-vnc/pull/56"
+echo "============================================================================================"
 
 exec /bin/tini -- supervisord -n -c /etc/supervisor/supervisord.conf
