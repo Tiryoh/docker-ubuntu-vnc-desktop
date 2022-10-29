@@ -4,7 +4,7 @@
 REPO  ?= dorowu/ubuntu-desktop-lxde-vnc
 TAG   ?= latest
 # you can choose other base image versions
-IMAGE ?= ubuntu:jammy-20220531
+IMAGE ?= ubuntu:jammy-20221020
 # IMAGE ?= nvidia/cuda:10.1-cudnn7-devel-ubuntu18.04
 # choose from supported flavors (see available ones in ./flavors/*.yml)
 FLAVOR ?= lxde
@@ -18,7 +18,7 @@ templates = Dockerfile rootfs/etc/supervisor/conf.d/supervisord.conf
 
 # Rebuild the container image
 build: $(templates)
-	cp Dockerfile Dockerfile.$(ARCH)
+	cp -f Dockerfile Dockerfile.$(ARCH)
 	docker build -t $(REPO):$(TAG) -f Dockerfile.$(ARCH) .
 
 # Test run the container
