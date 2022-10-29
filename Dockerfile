@@ -89,6 +89,13 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/* \
     && rm -rf /var/cache/apt/* /tmp/a.txt /tmp/b.txt
 
+# terminator
+RUN apt-get update \
+    && apt-get install -yq --no-install-recommends terminator \
+    && sudo apt-get purge -y tilix \
+    && apt-get autoclean -y \
+    && apt-get autoremove -y \
+    && rm -rf /var/lib/apt/lists/*
 
 ################################################################################
 # builder
