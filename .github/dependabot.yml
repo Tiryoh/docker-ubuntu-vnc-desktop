@@ -1,0 +1,21 @@
+version: 2
+updates:
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    open-pull-requests-limit: 10
+    reviewers:
+      - "Tiryoh"
+    assignees:
+      - "Tiryoh"
+    labels:
+      - "Type: Dependencies"
+      - "Lang: Dockerfile"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+    labels:
+      - "Type: Dependencies"
+      - "Type: CI"
