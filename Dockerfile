@@ -4,7 +4,7 @@
 # base system
 ################################################################################
 
-FROM ubuntu:jammy-20230804 as system
+FROM ubuntu:jammy-20230916 as system
 
 
 ENV DEBIAN_FRONTEND noninteractive
@@ -101,7 +101,7 @@ RUN apt-get update \
 # builder
 ################################################################################
 
-FROM ubuntu:jammy-20230804 as builder
+FROM ubuntu:jammy-20230916 as builder
 
 
 
